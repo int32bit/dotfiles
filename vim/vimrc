@@ -1,5 +1,5 @@
 " 定义快捷键的前缀，即<Leader>
-let mapleader="'"
+let mapleader="\<space>"
 
 " 开启文件类型侦测
 filetype on
@@ -56,6 +56,9 @@ set ignorecase
 set nocompatible
 " vim 自身命令行模式智能补全
 set wildmenu
+
+" 如果文件更新，自动刷新文件
+set autoread
 
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
@@ -116,6 +119,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree' 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/grep.vim'
 "Plugin 'suan/vim-instant-markdown'
 "Plugin 'xolox/vim-misc'
 "Plugin 'xolox/vim-easytags'
@@ -144,7 +148,7 @@ let g:indent_guides_guide_size=1
 :nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 
 " 基于缩进或语法进行代码折叠
-"set foldmethod=indent
+set foldmethod=indent
 set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable
