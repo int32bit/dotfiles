@@ -1,3 +1,4 @@
+# 设置session复用，在session生命周期内，不需要重复输入密码，在使用跳板机时特别有用
 Host *
     KeepAlive yes
     ServerAliveInterval 60
