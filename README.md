@@ -2,7 +2,7 @@
 
 A set of vim, zsh, git, and tmux configuration files.
 
-## configuration List
+## Configuration List
 
 * [ssh](ssh)
 * [tmux](tmux)
