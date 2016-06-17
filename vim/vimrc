@@ -127,7 +127,7 @@ Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
 Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
 Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
 Plugin 'vim-scripts/vimprj' "indexer 依赖
-Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags
+"Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
 
 
 "Plugin 'vim-scripts/Markdown'
