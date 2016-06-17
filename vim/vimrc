@@ -6,7 +6,7 @@ filetype on
 filetype plugin on
 
 " 自动缩进
-filetype indent on 
+filetype indent on
 
 " 开启语法高亮功能
 syntax enable
@@ -51,6 +51,7 @@ set softtabstop=4
 set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable
+" 交互式打开shell
 set shell=bash\ -i
 
 
@@ -58,10 +59,10 @@ set shell=bash\ -i
 
 " 定义快捷键的前缀，即<Leader>
 "let mapleader="\<space>"
-let mapleader=";"
+let mapleader="'"
 
 " 设置快捷键将选中文本块复制至系统剪贴板
-vnoremap <Leader>y "+y 
+vnoremap <Leader>y "+y
 
 " 设置快捷键将系统剪贴板内容粘贴至 vim
 nmap <Leader>p "+p
@@ -96,6 +97,10 @@ nnoremap <Leader>j <C-W>j
 " 定义快捷键在结对符之间跳转
 nmap <Leader>M %
 
+nnoremap <Leader>g <C-]>
+nnoremap <Leader>b <C-t>
+
+
 " ************** 插件管理与设置 ************ "
 
 " vundle 环境设置
@@ -104,21 +109,28 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'Lokaltog/vim-powerline' "status 美化
+Plugin 'octol/vim-cpp-enhanced-highlight' "对c++语法高亮增强
 Plugin 'kshenoy/vim-signature' "书签可视化的插件
 Plugin 'vim-scripts/BOOKMARKS--Mark-and-Highlight-Full-Lines' "书签行高亮
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree' 
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kien/ctrlp.vim'
-Plugin 'vim-scripts/grep.vim'
-Plugin 'vim-scripts/DfrankUtil'
-Plugin 'vim-scripts/vimprj'
-Plugin 'vim-scripts/indexer.tar.gz'
-Plugin 'Lokaltog/vim-easymotion'
+Plugin 'majutsushi/tagbar' "taglist的增强版，查看标签，依赖于ctags
+Plugin 'scrooloose/nerdcommenter' "多行注释，leader键+cc生成, leader+cu删除注释
+Plugin 'scrooloose/nerdtree' "文件浏览
+Plugin 'Valloric/YouCompleteMe' "自动补全
+Plugin 'kien/ctrlp.vim' "搜索历史打开文件，在命令行模式下按ctrl+p触发
+Plugin 'vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
+Plugin 'Lokaltog/vim-easymotion' "快速跳转，按两下leader键和f组合
+Plugin 'vim-scripts/ShowTrailingWhitespace.git' "高亮显示行尾的多余空白字符
+Plugin 'vim-scripts/indentpython.vim.git'
+Plugin 'vim-scripts/Solarized.git' "主题方案
+Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
+Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
+Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
+Plugin 'vim-scripts/vimprj' "indexer 依赖
+Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags
+
+
+"Plugin 'vim-scripts/Markdown'
 " 插件列表结束
 call vundle#end()
 filetype on
@@ -127,24 +139,16 @@ filetype on
 " 设置状态栏主题风格
 let g:Powerline_colorscheme='solarized256'
 
-" 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=1
-" 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=2
-" 色块宽度
-let g:indent_guides_guide_size=1
-" 快捷键 i 开/关缩进可视化
-:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
 
 
 " 设置tagbar
-" 设置 tagbar 子窗口的位置出现在主编辑区的左边 
-let tagbar_left=1 
+" 设置 tagbar 子窗口的位置出现在主编辑区的左边
+let tagbar_left=1
 " " 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
-nnoremap <Leader>t :TagbarToggle<CR> 
-" " 设置标签子窗口的宽度 
-let tagbar_width=32 
-" " tagbar 子窗口中不显示冗余帮助信息 
+nnoremap <Leader>t :TagbarToggle<CR>
+" " 设置标签子窗口的宽度
+let tagbar_width=32
+" " tagbar 子窗口中不显示冗余帮助信息
 let g:tagbar_compact=1
 " " 设置 ctags 对哪些代码标识符生成标签
 
@@ -207,6 +211,37 @@ set completeopt-=preview
 let g:ycm_min_num_of_chars_for_completion=1
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
-" 语法关键字补全         
+" 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+
+""" color settings
+set t_Co=256
+if has("gui_running")
+    set guioptions=gR
+    set mousemodel=popup
+    set background=light
+    ""hi LineNr cterm=bold guibg=black guifg=white
+    ""hi CursorLine cterm=none ctermbg=lightgray ctermfg=none
+    ""hi CursorColumn cterm=none ctermbg=lightgray ctermfg=none
+else
+    set background=dark
+    ""hi LineNr cterm=bold ctermbg=black ctermfg=white
+    ""hi CursorLine cterm=none ctermbg=darkgray ctermfg=none
+    ""hi CursorColumn cterm=none ctermbg=darkgray ctermfg=none
+endif
+"colorscheme solarized
+colorscheme default
+
+" indent guides
+"let g:indent_guides_enable_on_vim_startup=1
+" 从第二层开始可视化显示缩进
+let g:indent_guides_start_level=2
+"let g:indent_guides_auto_colors = 0
+"hi IndentGuidesOdd  guibg=red   ctermbg=3
+"hi IndentGuidesEven guibg=green ctermbg=4
+" 色块宽度
+let g:indent_guides_guide_size=1
+" 快捷键 i 开/关缩进可视化
+noremap <Leader>sj :IndentGuidesToggle<CR>
