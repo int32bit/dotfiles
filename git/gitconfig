@@ -29,7 +29,7 @@
     recent-branches = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
 
     # branch
-    b = branch                      # branch 
+    b = branch                      # branch
     ba = branch -av # branch (verbose)
 
     # commit

@@ -128,9 +128,8 @@ Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
 Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
 Plugin 'vim-scripts/vimprj' "indexer 依赖
 "Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
-
-
 "Plugin 'vim-scripts/Markdown'
+Plugin 'tpope/vim-surround'
 " 插件列表结束
 call vundle#end()
 filetype on
@@ -231,8 +230,8 @@ else
     ""hi CursorLine cterm=none ctermbg=darkgray ctermfg=none
     ""hi CursorColumn cterm=none ctermbg=darkgray ctermfg=none
 endif
-"colorscheme solarized
-colorscheme default
+colorscheme solarized
+"colorscheme default
 
 " indent guides
 "let g:indent_guides_enable_on_vim_startup=1
