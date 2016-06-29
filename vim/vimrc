@@ -124,12 +124,13 @@ Plugin 'vim-scripts/ShowTrailingWhitespace.git' "高亮显示行尾的多余空�
 Plugin 'vim-scripts/indentpython.vim.git'
 Plugin 'vim-scripts/Solarized.git' "主题方案
 Plugin 'nathanaelkane/vim-indent-guides.git' "缩进对齐显示
-Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
-Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
-Plugin 'vim-scripts/vimprj' "indexer 依赖
-"Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
-"Plugin 'vim-scripts/Markdown'
+"Plugin 'vim-scripts/indexer.tar.gz' "自动生成标签
+"Plugin 'vim-scripts/DfrankUtil' "indexer 依赖
+"Plugin 'vim-scripts/vimprj' "indexer 依赖
+Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，可以使用indexer替换，但不能跳转项目外
+Plugin 'vim-scripts/Markdown'
 Plugin 'tpope/vim-surround'
+Plugin 'ekalinin/Dockerfile.vim'
 " 插件列表结束
 call vundle#end()
 filetype on
