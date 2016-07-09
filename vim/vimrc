@@ -25,7 +25,7 @@ set number "显示行号
 set cursorline "高亮显示当前行
 "set cursorcolumn "高亮显示当前列
 set hlsearch "高亮显示搜索结果
-set nowrap "禁止折行
+" set nowrap "禁止折行
 set backspace=2 "回退键生效
 "set backspace=indent,eol,start
 
