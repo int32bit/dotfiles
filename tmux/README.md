@@ -12,7 +12,7 @@ unbind C-b
 
 ## Quick Start
 
-You need do nothing but execute the install script as follows:
+You need do nothing excpet executing following setup script:
 
 ```bash
 ./setup.sh
