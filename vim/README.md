@@ -22,16 +22,14 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 ### 3. Set up Plugins
 
-Open vim and type following command on normal mode:
+```bash
+vim "+PluginInstall" "+x" "+x"
+```
+
+Or open vim and type following command on normal mode:
 
 ```
 :PluginInstall
-```
-
-or 
-
-```
-vim +PluginInstall
 ```
 
 ### 4. Install YCM
