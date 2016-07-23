@@ -12,7 +12,7 @@ unbind C-b
 
 ## Quick Start
 
-You need do nothing excpet executing following setup script:
+You need do nothing except executing following setup script:
 
 ```bash
 ./setup.sh
