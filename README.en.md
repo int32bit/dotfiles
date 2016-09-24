@@ -1,4 +1,4 @@
-[中文版本](READMD.md)
+[中文版本](README.md)
 
 # dotfiles
 
