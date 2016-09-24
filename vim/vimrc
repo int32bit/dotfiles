@@ -54,6 +54,11 @@ set nofoldenable
 " 交互式打开shell
 set shell=bash\ -i
 
+" 打开上次文件关闭的位置
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 
 " *************** 设置全局快捷键 *****************
 
@@ -79,9 +84,6 @@ nmap <Leader>w :w<CR>
 " 不做任何保存，直接退出 vim
 "nmap <Leader>Q :qa!<CR>
 
-" 依次遍历子窗口
-nnoremap nw <C-W><C-W>
-
 " 跳转至右方的窗口
 nnoremap <Leader>l <C-W>l
 
@@ -93,6 +95,9 @@ nnoremap <Leader>k <C-W>k
 
 " 跳转至下方的子窗口
 nnoremap <Leader>j <C-W>j
+
+" 清除高亮显示
+nmap <Leader>N :noh<CR>
 
 " 定义快捷键在结对符之间跳转
 nmap <Leader>M %
@@ -231,7 +236,8 @@ else
     ""hi CursorLine cterm=none ctermbg=darkgray ctermfg=none
     ""hi CursorColumn cterm=none ctermbg=darkgray ctermfg=none
 endif
-colorscheme solarized
+
+:silent! colorscheme solarized
 "colorscheme default
 
 " indent guides
