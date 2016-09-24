@@ -100,3 +100,4 @@ You need install following package to compile YCM:
 * [jq](https://github.com/stedolan/jq): Command-line JSON processor.
 * [shellcheck](https://github.com/koalaman/shellcheck): A static analysis tool for shell scripts.
 * [yapf](https://github.com/google/yapf): A formatter for Python files.
+* [mosh](https://mosh.org/#getting): Mosh is a replacement for SSH. It's more robust and responsive, especially over Wi-Fi, cellular, and long-distance links.

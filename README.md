@@ -6,6 +6,8 @@ vim、zsh、tmux等配置文件管理。
 
 ## 1 ssh
 
+如果条件允许的话，建议使用[mosh](https://mosh.org/)替代ssh，mosh基于UDP传输，比ssh更稳定、更容忍网络故障和延迟，不会像ssh那样轻易掉线。由于很多服务器目前并没有安装mosh，使用ssh的还是占主流，并且mosh也不支持ssh-agent、X11-forward等。因此在本地需要配置下ssh。
+
 ### 1.1 快速配置
 
 在ssh目录下直接运行`setup.sh`脚本即可，不需要其它额外配置。
@@ -26,7 +28,7 @@ ControlPath ~/.ssh/socks/%h-%p-%r
 
 第一次建立连接时会在ControlPath目录下生成一个socket文件，文件格式为`%h-%p-%r`, 其中`%h`表示远程主机名，`%p`指连接的端口,`%r`是登录用户名。
 
-**注意：**
+**注意：** 
 
 * `.ssh`目录权限应设为`600`.
 * `~/.ssh/socks`目录需要手动创建。
@@ -501,7 +503,7 @@ EOF
 ```
 ## 6 git
 
-**注：**使用tig命令替换git命令。
+注：使用tig命令替换git命令。
 
 ### 6.1 基本配置
 
@@ -527,6 +529,7 @@ EOF
     old = red
     new = green
 ```
+
 ### 6.3 alias列表
 
 待补充。
@@ -542,6 +545,7 @@ EOF
 * [jq](https://github.com/stedolan/jq): json文件处理以及显示，可以替换`python -m json.tool`。
 * [shellcheck](https://github.com/koalaman/shellcheck): shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
 * [yapf](https://github.com/google/yapf): Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
+* [mosh](https://mosh.org/#getting): 可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
 
 ## 参考
 
