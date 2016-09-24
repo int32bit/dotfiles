@@ -65,6 +65,51 @@ UserKnownHostsFile /dev/null
 如果通过shell连接，不建议禁用公钥校验。
 
 ## 2 tmux
+
+### 2.1 快速配置
+
+运行`tmux/setup.sh`脚本即可，不需要其它额外配置。
+
+### 2.2 配置说明
+
+`prefix`键为默认的`ctrl-b`，个人感觉`ctrl-b`挺方便的，很多人设置为`ctrl-a`，这会与在命令行下快速移动光标到行首冲突，需要按两下ctrl-a。
+
+设置分屏:
+
+```
+# Split windows
+bind \ split-window -h
+bind - split-window -v
+```
+
+这样容易记住，`|`垂直分屏，`-`水平分屏。
+
+禁用windows自动命名，主要是它会覆盖原来的名字:
+
+```
+set-option -g allow-rename off  # prevent system from renaming our window
+```
+
+设置windows从1开始索引：
+
+```
+set -g base-index 1 # window index from 1, not zero
+```
+
+重新加载配置文件（prefix+r)：
+
+```
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+```
+
+打开一个临时窗口查看man手册:
+
+```
+bind-key / command-prompt "split-window -h 'exec man %%'"
+```
+
+只需要输入`prefix+/`,然后输入需要查询的命令即可。
+
 ## 3 vim
 
 ### 3.1 Setup
@@ -336,7 +381,7 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
 
 ![ctrlp](img/vim-ctrlp.jpg)
 
-#### vim-easymotion
+#### 10 vim-easymotion
 
 快速在文本中跳转，f命令的增强版，按两下Leader键和f命令组合使用,比如跳转在有a字母的位置：
 
@@ -350,7 +395,7 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
 
 ![easymotion](img/vim-easymotion.jpg)
 
-#### 9. vim-surround'
+#### 11. vim-surround'
 
 处理各种括号以及html标签，比如`()[]()`
 
@@ -366,7 +411,7 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
   if x>3 {                 ysW(        if ( x>3 ) {
   my $str = whee!;         vllllS'     my $str = 'whee!';
 ```
-#### 10. 其它插件
+#### 12. 其它插件
 
 ```vim
 * vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
@@ -380,7 +425,7 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
 * fatih/vim-go " go语言语法高亮
 ```
 
-### Theme
+### 3.4 Theme
 
 使用Solarized主题方案。
 
@@ -416,11 +461,68 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
 
 类似autojump，输入`z`能够查看cd历史记录以及权重，输入`z 模糊路径`能够快速cd到匹配的目录中。
 
-### 主题
+### 4.3 主题列表
 
 使用默认的`robbyrussell`主题。
 
-## 5 非常棒的命令工具
+### 4.4 alias列表
+
+待补充。
+
+```bash
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias grep='grep -E'
+alias df='df -h'
+
+# alias for harborclient
+alias harbor='docker run \
+ -e HARBOR_USERNAME="admin" \
+ -e HARBOR_PASSWORD="Harbor12345" \
+ -e HARBOR_URL="http://192.168.56.4" \
+ --net host --rm krystism/harborclient'
+# get my ip 
+alias my_ip="docker run -t -i --rm alpine sh -c 'ip route get 8.8.8.8' | cut -d ' ' -f 8 | head -n 1"
+
+# ipcalc not on Mac
+ipcalc='docker run -t -i --rm alpine ipcalc'
+ 
+```
+## 5 pip
+
+使用中科大源:
+
+```bash
+cat >>~/.pip/pip.conf <<EOF
+[global]
+index-url = https://pypi.mirrors.ustc.edu.cn/simple
+EOF
+```
+## 6 git
+
+**注：**使用tig命令替换git命令。
+
+### 6.1 颜色方案
+
+```
+[color]
+    ui = true
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red
+    new = green
+```
+### 6.2 alias列表
+
+待补充。
+
+## 7 非常棒的命令行工具
 
 * [ag](https://github.com/ggreer/the_silver_searcher): 比grep、ack更快的递归搜索文件内容。
 * [tig](https://github.com/jonas/tig): 字符模式下交互查看git项目。
