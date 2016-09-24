@@ -546,6 +546,30 @@ EOF
 * [shellcheck](https://github.com/koalaman/shellcheck): shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
 * [yapf](https://github.com/google/yapf): Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
 * [mosh](https://mosh.org/#getting): 可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
+* [fzf](https://github.com/junegunn/fzf): 命令行模糊搜索工具，能够交互式智能搜索并选取。
+
+![fzf](img/fzf.jpg)
+
+* [PathPicker(fpp)](https://github.com/facebook/PathPicker): 在命令行输出中自动识别目录和文件，交互式选择后使用EDTOR打开.
+
+```
+git diff HEAD~8 --stat
+```
+
+输出如下:
+
+![git-diff](img/git-diff.jpg)
+
+```
+git diff HEAD~8 --stat | fpp
+```
+
+可以光标选择文件打开或者执行命令:
+
+![fpp-demo](img/fpp-demo.jpg)
+
+绿色显示的表示我们选中的文件，此时输入enter键将调用编辑器打开选中的文件，也可以按c进入命令模式，可以输入执行的命令，选中的文件将作为命令的输入文件。
+
 
 ## 参考
 

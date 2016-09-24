@@ -101,3 +101,5 @@ You need install following package to compile YCM:
 * [shellcheck](https://github.com/koalaman/shellcheck): A static analysis tool for shell scripts.
 * [yapf](https://github.com/google/yapf): A formatter for Python files.
 * [mosh](https://mosh.org/#getting): Mosh is a replacement for SSH. It's more robust and responsive, especially over Wi-Fi, cellular, and long-distance links.
+* [fzf](https://github.com/junegunn/fzf): A command-line fuzzy finder written in Go.
+* [PathPicker(fpp)](https://github.com/facebook/PathPicker): A simple command line tool that solves the perpetual problem of selecting files out of bash output.
