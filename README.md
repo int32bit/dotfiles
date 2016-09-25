@@ -1,4 +1,4 @@
-[English Version](README.en.md)
+👉[English](README.en.md)
 
 # dotfiles
 
@@ -534,23 +534,47 @@ EOF
 
 待补充。
 
-## 7 非常棒的命令行工具
+## 7 非常棒的命令行工具（装机必备神器)
 
-* [ag](https://github.com/ggreer/the_silver_searcher): 比grep、ack更快的递归搜索文件内容。
-* [tig](https://github.com/jonas/tig): 字符模式下交互查看git项目。
+### [ag](https://github.com/ggreer/the_silver_searcher)
+
+比grep、ack更快的递归搜索文件内容。
+
+### [tig](https://github.com/jonas/tig)
+
+字符模式下交互查看git项目。
  
 ![tig-demo](img/tig-demo.jpg)
 
-* [mycli](https://github.com/dbcli/mycli): mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
-* [jq](https://github.com/stedolan/jq): json文件处理以及显示，可以替换`python -m json.tool`。
-* [shellcheck](https://github.com/koalaman/shellcheck): shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
-* [yapf](https://github.com/google/yapf): Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
-* [mosh](https://mosh.org/#getting): 可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
-* [fzf](https://github.com/junegunn/fzf): 命令行模糊搜索工具，能够交互式智能搜索并选取。
+### [mycli](https://github.com/dbcli/mycli)
+
+mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
+
+### [jq](https://github.com/stedolan/jq)
+
+json文件处理以及显示，可以替换`python -m json.tool`。
+
+### [shellcheck](https://github.com/koalaman/shellcheck)
+
+shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
+
+### [yapf](https://github.com/google/yapf)
+
+Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
+
+### [mosh](https://mosh.org/#getting)
+
+可以替代ssh，连接更稳定，即使IP变了，也能自动重连。
+
+### [fzf](https://github.com/junegunn/fzf)
+
+命令行下模糊搜索工具，能够交互式智能搜索并选取。
 
 ![fzf](img/fzf.jpg)
 
-* [PathPicker(fpp)](https://github.com/facebook/PathPicker): 在命令行输出中自动识别目录和文件，交互式选择后使用EDTOR打开.
+### [PathPicker(fpp)](https://github.com/facebook/PathPicker)
+
+在命令行输出中自动识别目录和文件，交互式选择后使用EDTOR打开.
 
 ```
 git diff HEAD~8 --stat
@@ -569,6 +593,41 @@ git diff HEAD~8 --stat | fpp
 ![fpp-demo](img/fpp-demo.jpg)
 
 绿色显示的表示我们选中的文件，此时输入enter键将调用编辑器打开选中的文件，也可以按c进入命令模式，可以输入执行的命令，选中的文件将作为命令的输入文件。
+
+### [pandoc](http://pandoc.org/)
+
+Markdown，HTML，PDF，LaTEX等文档格式之间的命令行转换工具。
+
+支持PDF转化需要依赖pdflatex:
+
+```
+brew cask install mactex
+```
+
+把`README.md`转化为PDF格式:
+
+```bash
+pandoc -f markdown_github -t latex -o README.pdf README.md
+```
+
+### [htop](https://hisham.hm/htop/)
+ 
+可以代替top命令，提供更美观、更方便的进程监控工具。
+
+![htop](img/htop.jpg)
+
+### [axel](http://axel.alioth.debian.org/)
+
+多线程下载工具，下载大文件时可以替代curl、wget。
+
+```sh
+axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
+```
+
+
+![axel](img/axel.jpg)
+
+yum、gentoo partage等包管理工具能配置axel为下载工具替代curl。Homebrew从2013年开始提出使用axel下载，但目前好像尚未实现，参考[#19802](https://github.com/Homebrew/legacy-homebrew/issues/19802)。
 
 
 ## 参考
