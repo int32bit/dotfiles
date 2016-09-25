@@ -2,7 +2,7 @@
 
 # dotfiles
 
-vim、zsh、tmux等配置文件管理。
+快速配置\*nix开发环境以及装机必备神器。😱
 
 ## 1 ssh
 
