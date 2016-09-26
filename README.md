@@ -114,6 +114,8 @@ bind-key / command-prompt "split-window -h 'exec man %%'"
 
 ## 3 vim
 
+注意：当加载太多插件时，vim启动会很慢，并且vim 8以前插件加载都是同步的，必须等待插件执行完才能继续下一个任务. 因此我把自动生成tags功能默认是关闭的, 避免每打开一个文件都要卡顿几秒。可以使用[neovim](https://neovim.io/)替代vim。
+
 ### 3.1 Setup
 
 在`dotfiles/vim`目录下运行`setup.sh`即可自动完成配置，配置过程中会自动安装vundle以及插件。
