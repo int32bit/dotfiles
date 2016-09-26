@@ -136,6 +136,7 @@ Plugin 'davidhalter/jedi-vim' "python 补全，不依赖于tags,但比较慢，�
 Plugin 'vim-scripts/Markdown'
 Plugin 'tpope/vim-surround'
 Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'ConradIrwin/vim-bracketed-paste' " 使用bracketed-paste mode，粘贴代码时避免格式化
 " 插件列表结束
 call vundle#end()
 filetype on
@@ -251,5 +252,3 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 noremap <Leader>sj :IndentGuidesToggle<CR>
-
-set rtp+=/usr/local/opt/fzf

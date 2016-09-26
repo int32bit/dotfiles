@@ -399,7 +399,7 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
 
 ![easymotion](img/vim-easymotion.jpg)
 
-#### 11. vim-surround'
+#### 11. vim-surround
 
 处理各种括号以及html标签，比如`()[]()`
 
@@ -415,7 +415,44 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
   if x>3 {                 ysW(        if ( x>3 ) {
   my $str = whee!;         vllllS'     my $str = 'whee!';
 ```
-#### 12. 其它插件
+
+#### 12. vim-bracketed-paste
+
+在vim使用系统粘贴板粘贴代码时，vim会根据缩进语法自动格式化代码，插入的多余的缩进符，这往往不是我们所预期的。比如我复制的内容为:
+
+```python
+class HelloObject(object):
+
+    def __init__(self):
+        pass
+
+    def sayHello():
+        print("HelloWorld!")
+
+
+if __name__ == "__main__":
+    HelloObject().sayHello()
+```
+
+在vim中insert粘贴内容效果为:
+
+![vim paste](img/vim-paste.jpg)
+
+通常的做法是使vim进入paste模式:
+
+```vim
+:set paste
+```
+
+每次粘贴复制都需要切换paste模式，这太麻烦了，而且容易忘记。我们可以利用[bracketed paste mode](http://cirw.in/blog/bracketed-paste)，该模式下粘贴时会自动在两端加入特殊字符，如复制的内容如果是`HelloWorld`，粘贴后的内容为:
+
+```
+00~HelloWorld01~
+```
+
+这使程序能够根据这些特殊字符判断输入是粘贴的还是用户手动输入的。vim-bracketed-paste插件正是利用了这个特性，判断如果是粘贴的内容，自动进入paste模式，内容粘贴结束，自动退出paste模式，完美解决了以上问题。
+
+#### 其它插件
 
 ```vim
 * vim-scripts/grep.vim' "在命令行模式使用grep命令，:Grep
@@ -447,7 +484,7 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
 
 #### git
 
-提供git的大多数别名，并且在git项目下会自动显示所在的分支。
+提供git常用简化别名，并且当工作目录在git项目下会自动显示所在的分支。
 
 #### zsh-syntax-highlighting
 
@@ -464,6 +501,10 @@ Vim自动补全插件，能够集成ctags以及jedi等，效果如图:
 #### z
 
 类似autojump，输入`z`能够查看cd历史记录以及权重，输入`z 模糊路径`能够快速cd到匹配的目录中。
+
+#### safe-paste
+
+默认情况下当复制粘贴文本到终端时，当遇到换行符，终端会立马执行该命令。如果同时复制多行内容，终端会把所有内容根据换行符拆分成多个命令依次执行。这显然不是我们所期望的。利用[bracketed paste mode](http://cirw.in/blog/bracketed-paste)特性，终端可以通过两端的特殊字符判断输入是粘贴的还是手动输入的，从而避免遇到换行符就立马执行。
 
 ### 4.3 主题列表
 
