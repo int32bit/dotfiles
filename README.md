@@ -68,6 +68,8 @@ UserKnownHostsFile /dev/null
 
 ## 2 tmux
 
+![tmux](img/tmux.jpg)
+
 ### 2.1 快速配置
 
 运行`tmux/setup.sh`脚本即可，不需要其它额外配置。
@@ -111,6 +113,12 @@ bind-key / command-prompt "split-window -h 'exec man %%'"
 ```
 
 只需要输入`prefix+/`,然后输入需要查询的命令即可。
+
+## 2.3 主题方案
+
+选用的主题是Solarized，参考[Making tmux Pretty and Usable - A Guide to Customizing your tmux.conf](http://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/)，为了和iterm以及vim集成，手动调节了部分颜色，包括panel boder颜色以及windows菜单颜色等。
+
+status bar设置在顶部，为了避免和vim status重叠。
 
 ## 3 vim
 
@@ -577,7 +585,14 @@ EOF
 
 待补充。
 
-## 7 非常棒的命令行工具（装机必备神器)
+## 7 iterm
+
+颜色方案基于内置Solarized Dark主题调节，最终效果如图:
+
+![iterm](img/iterm.jpg)
+
+
+## 附 非常棒的命令行工具（装机必备神器)
 
 ### [ag](https://github.com/ggreer/the_silver_searcher)
 
