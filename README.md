@@ -682,11 +682,36 @@ pandoc -f markdown_github -t latex -o README.pdf README.md
 axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
 ```
 
-
 ![axel](img/axel.jpg)
 
 yum、gentoo partage等包管理工具能配置axel为下载工具替代curl。Homebrew从2013年开始提出使用axel下载，但目前好像尚未实现，参考[#19802](https://github.com/Homebrew/legacy-homebrew/issues/19802)。
 
+### [sz/rz](https://github.com/mmastrac/iterm2-zmodem)
+
+ssh登录到服务器后经常需要传输文件, 通常我们会使用scp/rsync工具，或者使用ftp/nc等命令，临时解决办法还可以使用`python -m SimpleHTTPServer`或者`python3 -m http.server`开启HTTP服务器使用浏览器下载。
+
+sz/rz能够提供更简单的交互式接口快速地和本地主机进行文件传输,也就是上传和下载文件到服务器和本地。
+
+运行:
+
+```
+sz  a.txt b.txt c.txt
+```
+会立即弹出本地文件管理窗口选择保存位置，不需要输入密码。
+
+同样地，运行:
+
+```
+rz
+```
+
+会弹出本地文件管理工具，选择需要传输的文件，能够快速传输到当前服务器工作目录下。
+
+**注意: **
+
+* sz/rz目前不支持tmux(加上`-e`参数也无效), 因此不能在tmux session下执行rz/sz,否则会hang住。
+* Windows下使用xshell登录服务器，只需要在远程服务器安装lrzsz包即可，不需要在本地windows做任何配置。
+* 在Mac下，本地和远程服务器都需要安装lrzsz包，并且iterm2需要配置，参考[ZModem integration for iTerm 2](https://github.com/mmastrac/iterm2-zmodem)
 
 ## 参考
 
