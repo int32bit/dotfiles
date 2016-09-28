@@ -272,6 +272,39 @@ set guioptions-=m
 set guioptions-=T
 ```
 
+#### 3.2.7 sudo强制保存文件
+
+有时我们编辑文件时需要root权限，但忘了使用sudo，我们可以通过在vim调用系统命令把当前缓冲区内容强制写入到当前文件中。
+
+```vim
+:w !sudo tee %
+```
+
+解释下以上这个命令，`w`表示write，后面不加任何参数即保存到当前文件，如果后面有文件名，则会另存为指定的文件中，写入文件其实就是把当前缓冲区内容重定向到文件中，当然我们也可以重定向（管道）到另一个系统命令中作为该系统命令的输入。`!`表示在vim命令模式下执行shell命令，后面接的就是所要执行的命令。`%`可以认为是vim的一个寄存器，保存着当前打开的文件路径，因此`:w`其实就相当于`:w %`，知道这几个字符的含义后就大致知道这个命令的原理了，相当于:
+
+```bash
+vim write buffer | sudo tee ${CURRENT_FILE_PATH}
+```
+
+为了便捷，设置了如下快捷键:
+
+```vim
+nmap <Leader>W :w !sudo tee %<CR>
+```
+
+此时只需要按下Leader键`'`再按大写字母`W`就可以强制写入文件。
+
+注意当写入成功后会有以下警告信息:
+
+```
+W12: Warning: File "test.sh" has changed and the buffer was changed in Vim as well
+See ":help W12" for more info.
+[O]K, (L)oad File:
+```
+
+直接回车即可，保存文件后，我们使用`:q!`强制退出vim。
+
+
 ### 3.3 插件列表
 
 #### 1. Vundle
