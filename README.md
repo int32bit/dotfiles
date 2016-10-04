@@ -791,7 +791,7 @@ systemctl status openstack-nova-compute
 以上命令会自动替换为:
 
 ```
-systemcctl restart openstack-nova-compute
+systemctl restart openstack-nova-compute
 ```
 
 ### 3. 使用编辑器编辑长命令
