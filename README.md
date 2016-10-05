@@ -746,6 +746,12 @@ rz
 * Windows下使用xshell登录服务器，只需要在远程服务器安装lrzsz包即可，不需要在本地windows做任何配置。
 * 在Mac下，本地和远程服务器都需要安装lrzsz包，并且iterm2需要配置，参考[ZModem integration for iTerm 2](https://github.com/mmastrac/iterm2-zmodem)
 
+### [cloc](http://cloc.sourceforge.net/)
+
+cloc是代码统计工具，能够统计代码的空行数、注释行、编程语言等，如图:
+
+![cloc](img/cloc.jpg)
+
 ## 常用小技巧
 
 ### 1. sudo !!
