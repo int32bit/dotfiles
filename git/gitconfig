@@ -27,6 +27,7 @@
     # commit
     c = commit
     amend = commit --amend            # ammend your last commit
+    retry = commit -a --amend
 
     # checkout
     ck = checkout                     # checkout
