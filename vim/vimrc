@@ -51,8 +51,6 @@ set softtabstop=4
 set foldmethod=syntax
 " 启动 vim 时关闭折叠代码
 set nofoldenable
-" 交互式打开shell
-set shell=bash\ -i
 
 " 打开上次文件关闭的位置
 if has("autocmd")
