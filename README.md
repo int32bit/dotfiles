@@ -663,9 +663,46 @@ json文件处理以及显示，可以替换`python -m json.tool`。
 
 shell脚本静态检查工具，能够识别语法错误以及不规范的写法。
 
+比如有以下shell脚本`test.sh`:
+
+```sh
+#!/bin/bash
+a=1
+b=2
+for i in $@; do
+    echo $i
+done
+echo $a
+```
+
+使用shellcheck检查结果如下:
+
+```
+$ shellcheck test.sh
+
+In test.sh line 3:
+b=2
+^-- SC2034: b appears unused. Verify it or export it.
+
+
+In test.sh line 4:
+for i in $@; do
+         ^-- SC2068: Double quote array expansions to avoid re-splitting elements.
+
+
+In test.sh line 5:
+    echo $i
+         ^-- SC2086: Double quote to prevent globbing and word splitting.
+
+```
+
 ### [yapf](https://github.com/google/yapf)
 
 Google开发的python代码格式规范化工具，支持pep8以及Google代码风格。
+
+```sh
+yapf -i --style pep8 --recursive src/
+```
 
 ### [mosh](https://mosh.org/#getting)
 
