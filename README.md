@@ -659,7 +659,19 @@ mysql客户端，支持语法高亮和命令补全，效果类似ipython，可�
 
 ### [jq](https://github.com/stedolan/jq)
 
-json文件处理以及显示，可以替换`python -m json.tool`。
+json文件格式化处理以及高亮显示，可以替换`python -m json.tool`, 比如有以下json数据:
+
+```json
+{"migration_status": null, "attachments": [{"server_id": "80380c28-c765-448a-aa9a-c9bd5b10d64c", "attachment_id": "ba0d25c9-1066-4c49-9f05-3096d2596a44", "attached_at": "2017-03-28T02:56:24.000000", "host_name": null, "volume_id": "8cbea52c-be0d-4bf1-86f8-890b538d0771", "device": "/dev/vdb", "id": "8cbea52c-be0d-4bf1-86f8-890b538d0771"}], "links": [{"href": "http://192.168.0.156:8776/v2/abca38105b4345acbaad30d7fbf59e7d/volumes/8cbea52c-be0d-4bf1-86f8-890b538d0771", "rel": "self"}, {"href": "http://192.168.0.156:8776/abca38105b4345acbaad30d7fbf59e7d/volumes/8cbea52c-be0d-4bf1-86f8-890b538d0771", "rel": "bookmark"}], "availability_zone": "nova", "os-vol-host-attr:host": "cinder@ssd-ceph#ssd-ceph", "encrypted": false, "updated_at": "2017-03-28T02:56:24.000000", "replication_status": "disabled", "snapshot_id": null, "id": "8cbea52c-be0d-4bf1-86f8-890b538d0771", "size": 100, "user_id": "33ec3ec44f5440bca7760771b1f20ea6", "os-vol-tenant-attr:tenant_id": "abca38105b4345acbaad30d7fbf59e7d", "os-vol-mig-status-attr:migstat": null, "metadata": {"readonly": "False", "attached_mode": "rw"}, "status": "in-use", "volume_image_metadata": {}, "description": null, "multiattach": false, "source_volid": null, "consistencygroup_id": null, "os-vol-mig-status-attr:name_id": null, "name": "swift-1", "bootable": "false", "created_at": "2017-03-28T02:43:57.000000", "volume_type": null}
+```
+
+使用jq格式化输出如图:
+
+![jq demo](img/jq_demo.png)
+
+使用jq还可以应用各种filter，从而只输出我们感兴趣的字段:
+
+![jq filter](img/jq_filter.png)
 
 ### [shellcheck](https://github.com/koalaman/shellcheck)
 
