@@ -653,7 +653,9 @@ EOF
 
 ### [mycli](https://github.com/dbcli/mycli)
 
-mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令。
+mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令，效果如图:
+
+![mycli demo](img/mycli.png)
 
 ### [jq](https://github.com/stedolan/jq)
 
