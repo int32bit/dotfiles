@@ -137,13 +137,27 @@ status bar设置在顶部，为了避免和vim status重叠。
 * `g++`(CentOS下包名为`gcc-c++`)
 * `python-devel`
 
+```sh
+yum install ctags cmake gcc-c++ python-devel
+```
+
 检查ctags是否安装成功:
 
 ```
 ctags --list-languages
 ```
 
+打开vim，执行`:PluginInstall`命令或者直接运行以下命令:
+
+```sh
+vim "+PluginInstall" "+x" "+x"
+```
+
 最后配置YCM，在`~/.vim/bundle/YouCompleteMe`目录下运行`install.py`脚本。注意执行该脚本时必须已经安装`cmake`、`g++`、`python-devel`等，否则会build失败。
+
+```
+~/.vim/bundle/YouCompleteMe/install.sh
+```
 
 检查是否配置成功,大多数功能一般不会有什么问题，不需要检查，唯独自动补全功能需要确定是否工作，随便编辑一个C文件，看是否支持自动补全。
 
