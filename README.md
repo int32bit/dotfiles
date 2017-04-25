@@ -724,9 +724,17 @@ yapf -i --style pep8 --recursive src/
 
 ### [fzf](https://github.com/junegunn/fzf)
 
-命令行下模糊搜索工具，能够交互式智能搜索并选取。
+命令行下模糊搜索工具，能够交互式智能搜索并选取文件或者内容。
+
+```sh
+fzf
+```
 
 ![fzf](img/fzf.jpg)
+
+该命令还有一个最经典的应用是历史命令搜索，按下CTRL-R，结果如下:
+
+![fzf history search](img/fzf_history.png)
 
 ### [PathPicker(fpp)](https://github.com/facebook/PathPicker)
 
