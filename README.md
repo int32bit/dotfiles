@@ -778,7 +778,7 @@ pandoc -f markdown_github -t latex -o README.pdf README.md
  
 可以代替top命令，提供更美观、更方便的进程监控工具。
 
-![htop](img/htop.jpg)
+![htop](img/htop.png)
 
 ### [axel](http://axel.alioth.debian.org/)
 
