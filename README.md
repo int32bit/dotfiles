@@ -638,18 +638,90 @@ EOF
 
 ![iterm](img/iterm.jpg)
 
+## 常用小技巧
+
+### 1. sudo !!
+
+主要是利用了shell（bash）的`History Expansion`，我们使用history命令时能够列举执行的历史命令列表:
+
+```
+$ history
+1 tar cvf etc.tar /etc/
+2 cp /etc/passwd /backup
+3 ps -ef | grep http
+4 service sshd restart
+5 /usr/local/apache2/bin/apachectl restart
+```
+每个命令前面是命令编号，如果要重复执行某个命令，只需要输入`!`加命令编号即可,比如以上需要再次重启sshd服务，只需要执行:
+
+```bash
+!4
+```
+
+`!`后面如果是负数，则表示执行前第N个命令，比如`!-1`表示执行上一个命令,`!-5`则表示执行倒数第5个命令，执行上一个命令也可以使用`!!`替代，即`!-1`和`!!`是等价的，通常使用`!!`会更便捷。一个典型的场景是执行一条命令时需要root权限，忘记输入`sudo`了,只需要执行以下命令即可:
+
+```
+sudo !!
+```
+
+关于bash的History Expansion参考[Linux Bash History Expansion Examples You Should Know](http://www.thegeekstuff.com/2011/08/bash-history-expansion/)。
+
+### 2.  \^status\^restart
+
+我们经常可能需要重复执行上一条命令，但需要修改个别参数，比如我们使用`systemctl`查看nova-compute服务状态：
+
+```
+systemctl status openstack-nova-compute
+```
+
+如果我们发现服务异常，紧接下来的操作很可能是想重启下服务，此时只需要执行以下命令即可:
+
+```
+^status^restart
+```
+
+以上命令会自动替换为:
+
+```
+systemctl restart openstack-nova-compute
+```
+
+### 3. 使用编辑器编辑长命令
+
+我们经常遇到需要输入非常长的命令的情况，此时如果在shell里直接输入会特别麻烦，并且不好处理换行情况，此时可以调用本地编辑器编辑命令,输入`ctrl-x` + `ctrl-e`即可。
+
+### 4. 终端快捷键
+
+终端下几个常见的快捷键:
+
+* `ctrl-a`: 移动光标到行首。
+* `ctrl-e`: 移动光标到行尾。
+* `ctrl-w`: 剪切光标前一个单词（注意是剪切，不是彻底删除，可以通过`ctrl-y`粘贴。
+* `ctrl-u`: 剪切光标之前的所有内容，如果光标位于行尾，则相当于剪切整行内容。
+* `ctrl-k`: 剪切光标之后的所有内容，有点类似vim的`D`命令。
+* `ctrl-y`：粘贴剪切的内容。
+* `ctrl-p`、`ctrl-n`：向前/向后查看历史命令，和方向键的UP和Down等价。
+* `ctrl-l`: 清屏，相当于执行`clear`命令，注意不会清除当前行内容。
+* `ctrl-h`: 向前删除一个字符，相当于回退键。
+
+一个典型场景，输了一大串命令A还未执行，发现需要执行另一条命令B，又不想开启一个新的终端，怎么保存当前输入的内容A呢，有两种方式:
+
+1. 使用`ctrl-u`剪切整行内容A，执行完B命令后，使用`ctrl-y`恢复，在此之前不能有其它剪切操作，否则内容会被覆盖.
+2. 使用`ctrl-a`移动光标到行首，输入`#`注释当前行内容后直接回车，这相当于注释了当前行，但在history中依然会有记录，恢复时只需要使用`ctrl-p`找到刚刚的命令，去掉`#`即可。
 
 ## 附 非常棒的命令行工具（装机必备神器)
 
 ### [ag](https://github.com/ggreer/the_silver_searcher)
 
-比grep、ack更快的递归搜索文件内容。
+比grep、ack更快地递归搜索文件内容。
+
+![ag](img/ag.png)
 
 ### [tig](https://github.com/jonas/tig)
 
 字符模式下交互查看git项目。
  
-![tig-demo](img/tig-demo.jpg)
+![tig](img/tig.png)
 
 ### [mycli](https://github.com/dbcli/mycli)
 
@@ -691,24 +763,7 @@ echo $a
 
 使用shellcheck检查结果如下:
 
-```
-$ shellcheck test.sh
-
-In test.sh line 3:
-b=2
-^-- SC2034: b appears unused. Verify it or export it.
-
-
-In test.sh line 4:
-for i in $@; do
-         ^-- SC2068: Double quote array expansions to avoid re-splitting elements.
-
-
-In test.sh line 5:
-    echo $i
-         ^-- SC2086: Double quote to prevent globbing and word splitting.
-
-```
+![shellcheck](img/shellcheck.png)
 
 ### [yapf](https://github.com/google/yapf)
 
@@ -813,7 +868,7 @@ rz
 
 会弹出本地文件管理工具，选择需要传输的文件，能够快速传输到当前服务器工作目录下。
 
-**注意: **
+**注意:**
 
 * sz/rz目前不支持tmux(加上`-e`参数也无效), 因此不能在tmux session下执行rz/sz,否则会hang住。
 * Windows下使用xshell登录服务器，只需要在远程服务器安装lrzsz包即可，不需要在本地windows做任何配置。
@@ -825,77 +880,192 @@ cloc是代码统计工具，能够统计代码的空行数、注释行、编程�
 
 ![cloc](img/cloc.jpg)
 
-## 常用小技巧
+### [you-get](https://you-get.org/)
 
-### 1. sudo !!
-
-主要是利用了shell（bash）的`History Expansion`，我们使用history命令时能够列举执行的历史命令列表:
+从网页中自动捕捉视频、音频、图片并下载到本地，支持youtube、google+、优酷、芒果TV、腾讯视频、秒拍等。
 
 ```
-$ history
-1 tar cvf etc.tar /etc/
-2 cp /etc/passwd /backup
-3 ps -ef | grep http
-4 service sshd restart
-5 /usr/local/apache2/bin/apachectl restart
-```
-每个命令前面是命令编号，如果要重复执行某个命令，只需要输入`!`加命令编号即可,比如以上需要再次重启sshd服务，只需要执行:
+$ you-get 'https://www.youtube.com/watch?v=jNQXAC9IVRw'
+site:                YouTube
+title:               Me at the zoo
+stream:
+    - itag:          43
+      container:     webm
+      quality:       medium
+      size:          0.5 MiB (564215 bytes)
+    # download-with: you-get --itag=43 [URL]
 
-```bash
-!4
-```
+Downloading zoo.webm ...
+100.0% (  0.5/0.5  MB) ├████████████████████████████████████████┤[1/1]    7 MB/s
 
-`!`后面如果是负数，则表示执行前第N个命令，比如`!-1`表示执行上一个命令,`!-5`则表示执行倒数第5个命令，执行上一个命令也可以使用`!!`替代，即`!-1`和`!!`是等价的，通常使用`!!`会更便捷。一个典型的场景是执行一条命令时需要root权限，忘记输入`sudo`了,只需要执行以下命令即可:
-
-```
-sudo !!
+Saving Me at the zoo.en.srt ...Done.
 ```
 
-关于bash的History Expansion参考[Linux Bash History Expansion Examples You Should Know](http://www.thegeekstuff.com/2011/08/bash-history-expansion/)。
+### [thefuck](https://github.com/nvbn/thefuck)
 
-### 2.  \^status\^restart
+命令输错，fuck!
 
-我们经常可能需要重复执行上一条命令，但需要修改个别参数，比如我们使用`systemctl`查看nova-compute服务状态：
+![fuck](img/fuck.gif)
+
+### script/scriptreplay
+
+视频录制有很多工具，但如果是终端录制则使用script非常方便。
+
+开始录制:
+
+```sh
+script -t 2>time.txt session.typescript # 开始录制
+[root@mistral ~]# ls
+dotfiles  mistral  mistral-actions  openrc  session.typescript  time.txt  workbook.yaml  workflows
+[root@mistral ~]# date
+Wed May  3 20:21:14 CST 2017
+[root@mistral ~]# cal
+      May 2017
+Su Mo Tu We Th Fr Sa
+    1  2  3  4  5  6
+ 7  8  9 10 11 12 13
+14 15 16 17 18 19 20
+21 22 23 24 25 26 27
+28 29 30 31
+
+[root@mistral ~]# exit #结束录制
+```
+
+session回放:
 
 ```
-systemctl status openstack-nova-compute
+scriptreplay -t time.txt session.typescript
 ```
 
-如果我们发现服务异常，紧接下来的操作很可能是想重启下服务，此时只需要执行以下命令即可:
+### [cheat](https://github.com/chrisallenlane/cheat)
+
+命令笔记，保存一些有用但是老是记不住的命令。
+
+比如OpenStack的`nova`命令，只需要把有用的命令保存到`~/.cheat/nova`文件中:
 
 ```
-^status^restart
+➜  nova git:(mitaka) ✗ cat ~/.cheat/nova
+# To list VMs on current tenant:
+nova list
+
+# To list VMs of all tenants (admin user only):
+nova list --all-tenants
+
+# To boot a VM on a specific host:
+nova boot --nic net-id=<net_id> \
+          --image <image_id> \
+          --flavor <flavor> \
+          --availability-zone nova:<host_name> <vm_name>
+
+# To stop a server
+nova stop <server>
+
+# To start a server
+nova start <server>
+
+# To attach a network interface to a specific VM:
+nova interface-attach --net-id <net_id> <server>
 ```
 
-以上命令会自动替换为:
+要用的时候，使用`cheat`查询:
 
 ```
-systemctl restart openstack-nova-compute
+➜  nova git:(mitaka) ✗ cheat nova
+# To list VMs on current tenant:
+nova list
+
+# To list VMs of all tenants (admin user only):
+nova list --all-tenants
+
+# To boot a VM on a specific host:
+nova boot --nic net-id=<net_id> \
+          --image <image_id> \
+          --flavor <flavor> \
+          --availability-zone nova:<host_name> <vm_name>
+
+# To stop a server
+nova stop <server>
+
+# To start a server
+nova start <server>
+
+# To attach a network interface to a specific VM:
+nova interface-attach --net-id <net_id> <server>
 ```
 
-### 3. 使用编辑器编辑长命令
+如果连命令都忘了，cheat还支持模糊搜索:
 
-我们经常遇到需要输入非常长的命令的情况，此时如果在shell里直接输入会特别麻烦，并且不好处理换行情况，此时可以调用本地编辑器编辑命令,输入`ctrl-x` + `ctrl-e`即可。
+```
+➜  nova git:(mitaka) ✗ cheat -s 'nov'
+nova:
+  nova list
+  nova list --all-tenants
+  nova boot --nic net-id=<net_id> \
+            --availability-zone nova:<host_name> <vm_name>
+  nova stop <server>
+  nova start <server>
+  nova interface-attach --net-id <net_id> <server>
+```
 
-### 4. 终端快捷键
+cheat还收集了一些常用的命令，比如`tar`:
 
-终端下几个常见的快捷键:
+```
+# To extract an uncompressed archive:
+tar -xvf /path/to/foo.tar
 
-* `ctrl-a`: 移动光标到行首。
-* `ctrl-e`: 移动光标到行尾。
-* `ctrl-w`: 剪切光标前一个单词（注意是剪切，不是彻底删除，可以通过`ctrl-y`粘贴。
-* `ctrl-u`: 剪切光标之前的所有内容，如果光标位于行尾，则相当于剪切整行内容。
-* `ctrl-k`: 剪切光标之后的所有内容，有点类似vim的`D`命令。
-* `ctrl-y`：粘贴剪切的内容。
-* `ctrl-p`、`ctrl-n`：向前/向后查看历史命令，和方向键的UP和Down等价。
-* `ctrl-l`: 清屏，相当于执行`clear`命令，注意不会清除当前行内容。
-* `ctrl-h`: 向前删除一个字符，相当于回退键。
+# To create an uncompressed archive:
+tar -cvf /path/to/foo.tar /path/to/foo/
 
-一个典型场景，输了一大串命令A还未执行，发现需要执行另一条命令B，又不想开启一个新的终端，怎么保存当前输入的内容A呢，有两种方式:
+# To extract a .gz archive:
+tar -xzvf /path/to/foo.tgz
 
-1. 使用`ctrl-u`剪切整行内容A，执行完B命令后，使用`ctrl-y`恢复，在此之前不能有其它剪切操作，否则内容会被覆盖.
-2. 使用`ctrl-a`移动光标到行首，输入`#`注释当前行内容后直接回车，这相当于注释了当前行，但在history中依然会有记录，恢复时只需要使用`ctrl-p`找到刚刚的命令，去掉`#`即可。
+# To create a .gz archive:
+tar -czvf /path/to/foo.tgz /path/to/foo/
 
+# To list the content of an .gz archive:
+tar -ztvf /path/to/foo.tgz
+
+# To extract a .bz2 archive:
+tar -xjvf /path/to/foo.tgz
+
+# To create a .bz2 archive:
+tar -cjvf /path/to/foo.tgz /path/to/foo/
+
+# To list the content of an .bz2 archive:
+tar -jtvf /path/to/foo.tgz
+
+# To create a .gz archive and exclude all jpg,gif,... from the tgz
+tar czvf /path/to/foo.tgz --exclude=\*.{jpg,gif,png,wmv,flv,tar.gz,zip} /path/to/foo/
+
+# To use parallel (multi-threaded) implementation of compression algorithms:
+tar -z ... -> tar -Ipigz ...
+tar -j ... -> tar -Ipbzip2 ...
+tar -J ... -> tar -Ipixz ...
+```
+
+## Mac专有的命令行工具
+
+### say
+
+文本朗读工具，支持各种怪异(恐怖)的声音和语气。在终端下跑这个命令体验所有的声音，小心别被吓着了：
+
+```
+for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World';done
+```
+
+### pbcopy/pbpaste
+
+pbcopy把终端输出通过管道传到系统粘贴板：
+
+```
+cat test.sh | pbcopy
+```
+
+pbpaste把系统粘贴板内容输出到终端:
+
+```
+pbpaste
+```
 
 ## 参考
 
