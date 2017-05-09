@@ -845,7 +845,17 @@ axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minima
 
 ![axel](img/axel.jpg)
 
-yum、gentoo partage等包管理工具能配置axel为下载工具替代curl。Homebrew从2013年开始提出使用axel下载，但目前好像尚未实现，参考[#19802](https://github.com/Homebrew/legacy-homebrew/issues/19802)。
+yum、gentoo partage等包管理工具能配置axel为下载工具替代curl。
+
+CentOS系统需要安装[yum-axelget](https://github.com/crook/yum-axelget)插件，安装和配置过程如下:
+
+```sh
+yum install axel yum-plugin-fastestmirror yum-axelget
+```
+
+修改`/etc/yum/pluginconf.d/axelget.conf`配置文件，根据需求调整`maxconn`值。
+
+Homebrew从2013年开始提出使用axel作为下载工具，但目前好像尚未实现，参考[#19802](https://github.com/Homebrew/legacy-homebrew/issues/19802)。
 
 ### [sz/rz](https://github.com/mmastrac/iterm2-zmodem)
 
