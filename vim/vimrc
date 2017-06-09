@@ -252,3 +252,7 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 " 快捷键 i 开/关缩进可视化
 noremap <Leader>sj :IndentGuidesToggle<CR>
+
+" 每行不能超过80字符，否则高亮显示
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%80v.\+/

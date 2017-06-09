@@ -193,7 +193,12 @@ set cursorline "高亮显示当前行
 "set cursorcolumn "高亮显示当前列
 set hlsearch "高亮显示搜索结果
 set backspace=2 "回退键生效
+
+" 每行不能超过80字符，否则高亮显示。
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%80v.\+/
 ```
+
 
 #### 3.2.2 设置Leader键
 
