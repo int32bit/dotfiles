@@ -15,7 +15,8 @@ syntax on
 
 set nocompatible "关闭兼容模式
 set incsearch "开启实时搜索功能
-set ignorecase "搜索忽略大小写
+set ignorecase "搜索时忽略大小写
+set smartcase "搜索时如果只包含小写字母，匹配结果忽略大小写，如果包含大写字母，匹配结果是大小写敏感。
 set wildmenu "vim命令自动补全
 set autoread "文件自动更新
 set gcr=a:block-blinkon0 "禁止关闭闪烁
