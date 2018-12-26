@@ -66,6 +66,18 @@ UserKnownHostsFile /dev/null
 
 如果通过shell连接，不建议禁用公钥校验。
 
+### 1.5 ssh操作自动安全退出
+
+我们经常需要通过堡垒机连接生产环境，如果是通过windows共享session方式访问，使用xshell或者其他ssh client 连接远程主机，往往容易忘记退出登录，其他人
+连接该session时可看到没退出的ssh session，存在巨大的安全隐患。可以设置TMOUT环境变量，比如设置TMOUT=60，则终端超过60秒未操作时，session会自动退出。
+一般安全加固的Linux操作系统都会在/etc/profile下export TMOUT=300。
+
+```bash
+# /etc/profile
+
+export TMOUT=300
+```
+
 ## 2 tmux
 
 ![tmux](img/tmux.jpg)
